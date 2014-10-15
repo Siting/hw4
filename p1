@@ -25,8 +25,25 @@ There are two possible situations when randomly choose four points:
 \item three points form a convex hull and one point is internal. This situation cannot be classified when the first three points (on the convex hull) have positive label and the fourth point has negative label.
 \end{itemize}
 
+Therefore, we proved that the VC dimension of H is 3.
 
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{part b}
 VC dimension of H is 2k.
+
+We start with the base case with one point $x_1$ on the real line. It is easy to see that we are able to shatter this point no matter it has a positive label (choose $a_1<x_1<b_1$ or a negative label (choose $b_1<x_1<a_2$).
+
+The most complicated which is also the hardest case to classify is when neighboring points have opposite labels. For example, the most complicated case of four points is when $x_1$ and $x_3$ have positive labels and $x_2$ and $x_4$ have negative labels. The reasont that it is the hardest case to classify is because each of these four points need to be placed or assigned to a disjoint interval. This leads to the requirement of four intervals. As long as we have enough intervals, at least four intervals, to cope this situation, the points are shattered.
+
+Given 2k points on the real line which has k disjoint intervals within which points are labeled as potive and k more disjoint intervals within which points are negative. The largest number of points that can be shattered is 2k since we are able to assign 2k points with neighboring points have opposite labels into these 2k intervals.
+
+However, H cannot shatter 2k+1 points. Again, consider the most complicated situation with the leftmost point with a positive label. Since the leftmost point must fall in the region with $x_{leftmost}<a_1$, there is no way any hypothesis from H can classify these points, especially the leftmost point.
+
+Therefore, we proved that the VC dimension of H is 2k.
+
+
+
+
+
+
+
