@@ -5,6 +5,52 @@ $\neg{c} = <(c_1,\neg{b_1}), ..., (c_l, \neg{b_l}), \neg{b}>$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{part b}
-First, show k-DNF$\subseteq$k-DL. Since each term of k-DNF can be trasformed into an item of a decision list with value 1, then clearly k-DNF$\subseteq$k-DL.
-Next, since we can always find some k-DNF that complements any k-CNF along with the fact that k-DL is closed under complementation (shown in part a), we say that k-CNF$\subseteq$k-DL.
-With each component a subset of k-DL, we say there union is also a subset of k-DL denoted as k-DNF $\cup$ k-CNF$\subseteq$k-DL
+First, show k-DNF$\subseteq$k-DL. Since each term of k-DNF can be transformed into an item of a decision list with value 1, then clearly k-DNF$\subseteq$k-DL.
+
+Next, according to DeMorgan's Rules, we can always find some k-DNF that complements any k-CNF. Along with the fact that k-DL is closed under complementation (shown in part a), we say that k-CNF$\subseteq$k-DL.
+
+With each component a subset of k-DL, we say there union is also a subset of k-DL denoted as k-DNF $\cup$ k-CNF$\subseteq$k-DL.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{part c}
+Input of the algorithm: sample space $S$ over samples $\textbf{x}$ which have $n$ dimensions. Output: decision list $DL$ that is consistent with all samples.
+
+Notations: $L_n$ denotes the set of 2n literals ($x_n, \neg{x_n}$) associated with samples. $C_k^n$ denotes the set of all conjunctions of size at most $k$ with literals drawn from $L_n$.
+
+\begin{enumerate}
+\item Check if sample space $S$ is empty. If so, stop the algorithm. If not, continue.
+\item Set the default output which is denoted by $b = 0$.
+\item Check each item in $C_k^n$ in turn until found an item $e$ that all samples $\textbf{x}$ in $S$ outputs the same label $l$, either positive or negative, when $e$ is true.
+\item Move the samples from $S$ into $T$ if it makes $e$ true.
+\item Put $e$ in decision list $DL$ along with its output label $l$.
+\item For the rest samples in $S$, repeat step 1 to 4 until $S$ is empty.
+\end{enumerate}
+
+Note that in this algorithm, we didn't double check the existence of an item $e$ or a decision list that is consistent with all samples since the question statement claims that the samples are consistent with some k-decision list.
+
+The intuition of this algorithm is that if a conjunction/item $e$ that is consistent with the given samples, then no matter in which order it presents or being added to the decision list, it will always be consistent with any subset of the samples. Therefore, the order we examine items from $C_k^n$ does not kill the algorithm.
+
+In summary, the algorithm starts by checking items in $C_k^n$ and finding the first item that is consistent with the samples in $S$. As soon as it finds such an item, the algorithm puts it into the decision list and delete the samples from the sample space $S$. The algorithm continues finding item that is consistent with the updated $S$ until $S$ is empty which means all samples are being classified or explained.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{part d}
+
+According to Occam's Razor: $m>\frac{1}{\epsilon}(ln(|H|)+ln(\frac{1}{\delta}))$. In order to show that the class of k-decision lists is efficiently PAC-learnable, we need to show that the size of k-decision list is linear in n.
+
+Again, we adopt the notations $L_n$ denotes the set of 2n literals ($x_n, \neg{x_n}$) associated with samples and $C_k^n$ denotes the set of all conjunctions of size at most $k$ with literals drawn from $L_n$.
+
+Since all samples have $n$ dimensions, we know that for all items in decision list there are $3^{|C_k^n|}$ combinations given each term has three options of missing, negative and positive. Another thing to notice is that the order of terms appeared in each item does not matter which gives us $(C_k^n)!$ combinations.
+
+Therefore, the size of a k-decision list is $\mathcal{O}(3^{|C_k^n|}(C_k^n)!)$. Then we have $lg(|k-DL(n)|) = \mathcal{O}(n^t)$ for some constant $t$.
+
+We conclude that k-decision list has size which linear in n and the class is efficiently PAC-learnable.
+
+
+
+
+
+
+
+
+
+
