@@ -35,15 +35,17 @@ In summary, the algorithm starts by checking items in $C_k^n$ and finding the fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{part d}
 
-According to Occam's Razor: $m>\frac{1}{\epsilon}(ln(|H|)+ln(\frac{1}{\delta}))$. In order to show that the class of k-decision lists is efficiently PAC-learnable, we need to show that the size of k-decision list is linear in n.
+According to Occam's Razor: $m>\frac{1}{\epsilon}(ln(|H|)+ln(\frac{1}{\delta}))$. In order to show that the class of k-decision lists is efficiently PAC-learnable, we need to study the size of k-decision list is linear in n. Also, we need to study the computational complexity of the class.
 
 Again, we adopt the notations $L_n$ denotes the set of 2n literals ($x_n, \neg{x_n}$) associated with samples and $C_k^n$ denotes the set of all conjunctions of size at most $k$ with literals drawn from $L_n$.
 
 Since all samples have $n$ dimensions, we know that for all items in decision list there are $3^{|C_k^n|}$ combinations given each term has three options of missing, negative and positive. Another thing to notice is that the order of terms appeared in each item does not matter which gives us $(C_k^n)!$ combinations.
 
-Therefore, the size of a k-decision list is $\mathcal{O}(3^{|C_k^n|}(C_k^n)!)$. Then we have $lg(|k-DL(n)|) = \mathcal{O}(n^t)$ for some constant $t$.
+Therefore, the size of a k-decision list is $\mathcal{O}(3^{|C_k^n|}(C_k^n)!)$. Then we have $lg(|k-DL(n)|) = \mathcal{O}(n^t)$ for some constant $t$.We conclude that k-decision list has size which is polynomial in n.
 
-We conclude that k-decision list has size which linear in n and the class is efficiently PAC-learnable.
+Next, we study the computational complexity of the algorithm proposed in part c to find a k-decision list. The computation complexity is also polynomial in time since the critical component $C_k^n$, in the algorithm, is polynomial in $n$ for any fixed $k$.
+
+Therefore, we conclude that with polynomial sample size and polynomial computation time, the k-decision list class is efficiently PAC-learnable.
 
 
 

@@ -1,0 +1,56 @@
+\section{Constructing Kernels}
+
+\subsection{part a}
+
+Give function $c(\cdot)$ represents conjunctions containing up to $k$ different literals, what it means is that $c(x_1)$ is checking if all literals in $c(\cdot)$ are active literals in example $x_1$. If yes, it has output of positive 1, otherwise it ouputs 0. The same for $c(x_2)$. Then we know, $c(x_1)c(x_2)$ checks if all literals in $c(\cdot)$ are active literals both in example $x_1$ and $x_2$. If yes, outputs positive 1 otherwise 0.
+
+The kernel $K(x_1, x_2)$ as stated in the problem is summing over all possible conjunctions $c(\cdot)$ evaluated on $x_1$ and $x_2$. If to compute the kernel function follows the function defined in the problem, the computational time required is not linear in $n$. So we need to propose a new approach to compute the kernel value.
+
+We propose the following approach:
+
+\begin{equation}
+K(x_1,x_2) = \sum_{j=0}^{min(k, \text{numCommon($x_1$, $x_2$)}) } {\text{numCommon($x_1$, $x_2$)} \choose j}
+\end{equation}
+
+in which $\text{numCommon($x_1$, $x_2$)}$ returns the number of common literals shared by $x_1$ and $x_2$.
+
+The idea of this approach is to first calculate the number of common literals shared by $x_1$ and $x_2$, and then formulate the class $C$ by choosing 1, 2 to up to $k$ literals from the common literals. Computing the total number of such $c$ gives us the exactly the same kernel value as defined in the problem statement. And the above equation helps us to compute this total number by summing over all possible $j's$. The number $j$ is upbounded by the min(k, \text{numCommon($x_1$, $x_2$)}) to take care of the case where the number of common literals is bigger than $k$.
+
+Now, we prove that our proposed apporach gives the same result as the function defined in the problem statement. Observe the kernel function defined in the problem, the only conjunctions $c$ that will contriubte to the kernel value are those returning value 1 given $x_1$ and $x_2$. And these conjunctions are exactly the ones we selected using the proposed approach since each $c$ from $C$ is guaranteeed to return 1 evaluating on either $x_1$ or $x_2$. So it is sufficient only to consider these $c$.
+
+Next, we prove the computational complexity of our proposed approach is linear in $n$. Given any two n-dimensional example $x_1$ and $x_2$, we are able to compute the number of their common literals in $\mathcal{O}(n)$. Then we compute $1!, 2!, ..., \text{numCommon($x_1$, $x_2$)}!$ in $\mathcal{O}(n)$. The final step is to perform summation of all chooses which could be finished in $\mathcal{O}(1)$. Therefore, the proposed approach could be computed in $\mathcal{O}(n)$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{part b}
+\begin{algorithm}[H]
+ \KwData{Training examples denoted by $x_t$.}
+ \KwResult{A hypothesis $h$}
+  set $h = x_1 \vee \neg x_1 \vee x_2 \vee \neg x_2 ... x_n \vee \neg x_n$\;
+ \For{every example $(x_t,y_t)$}{
+    \For{entry $x_i$ in $s$} {
+        \eIf{$x_i = 1$}{remove $x_i$ from $h$\;}
+        {remove $\neg x_i$ from $h$\;}
+    }
+ }
+
+ \For{sample $s \in Tr_s$ with label $1$}{
+    \If{all entry(entries) in $s$ can not be found in h}{return: Cannot find a hypothesis $h$ consistent with all training samples\;}
+ }
+
+return: h\;
+
+ \caption{Kerlenl Perceptron Algorithm}
+\end{algorithm}
+
+
+
+
+
+
+
+
+
+
+
+
