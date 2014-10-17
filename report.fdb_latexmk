@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1413490369 "report.tex" "report.pdf" "report" 1413490369
+["pdflatex"] 1413504812 "report.tex" "report.pdf" "report" 1413504813
   "/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/etexcmds.sty" 1335995445 7612 c47308d923ec19888707b0f1792b326a ""
   "/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/ifluatex.sty" 1303254447 7324 11d14f318d865f420e692d4e6c9c18c3 ""
@@ -23,6 +23,8 @@
   "/usr/local/texlive/2013/texmf-dist/tex/latex/base/ifthen.sty" 1254151887 5022 2ec7815b07dc68e65542e23a180bc839 ""
   "/usr/local/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd" 1254151887 2109 c400bd6c901edc4a09e4d53fcffd3b3c ""
   "/usr/local/texlive/2013/texmf-dist/tex/latex/base/size12.clo" 1254151887 9053 a28d9b3c915d12545f3d5e7c4986be20 ""
+  "/usr/local/texlive/2013/texmf-dist/tex/latex/esvect/esvect.sty" 1137110106 2216 de0678a81f24949d89c373d773e10a9f ""
+  "/usr/local/texlive/2013/texmf-dist/tex/latex/esvect/uesvect.fd" 1137110106 871 1db67a6cb048038ebd1c0c0f606b8537 ""
   "/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/color.sty" 1156702488 6406 6f55214ce374a5b186b8781f4796f1f9 ""
   "/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/graphics.sty" 1254151804 14183 42a8fc761b806986eef292369afc2988 ""
   "/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/graphicx.sty" 1156702488 7882 3bd78469d444e8d494e27cfd7ca92719 ""
@@ -44,9 +46,9 @@
   "cs446.tex" 1413490213 2169 1f31833cdc71bb78defddf838d25b696 ""
   "p1" 1413380200 3087 2f95382552fe38d90f58cf75484e9292 ""
   "p2.tex" 1413388839 4133 7843c127112c875199832f0a7b2986f6 ""
-  "p3.tex" 1413490368 3335 d69586c34636f63f4eb6552002f2505b ""
-  "report.aux" 1413490369 928 308c6eba1a12f55ff33aa4cb135785e6 ""
-  "report.tex" 1413490205 551 efb1b5157aaf4aae3d42f0459b1c2cd9 ""
+  "p3.tex" 1413504811 3727 e2b0cd6fe474d9c68144f8214d4e9c25 ""
+  "report.aux" 1413504813 1000 d7e0d7bea74dd9c16a97401846137be5 ""
+  "report.tex" 1413494172 571 2b0054b74a845fa0c729d555969e0764 ""
   (generated)
   "report.aux"
   "report.pdf"
