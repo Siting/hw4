@@ -5,11 +5,11 @@ $\neg{c} = <(c_1,\neg{b_1}), ..., (c_l, \neg{b_l}), \neg{b}>$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{part b}
-First, show k-DNF$\subseteq$k-DL. Since each term of k-DNF can be transformed into an item of a decision list with value 1, then clearly k-DNF$\subseteq$k-DL.
+First, show k-DNF$\subseteq$k-DL. Since each term of k-DNF can be transformed into an condition of a decision list with value 1, then clearly k-DNF$\subseteq$k-DL.
 
-Next, according to DeMorgan's Rules, we can always find some k-DNF that complements any k-CNF. Along with the fact that k-DL is closed under complementation (shown in part a), we say that k-CNF$\subseteq$k-DL.
+Next, according to DeMorgan's Rules, we can always find some k-DNF that complements any given k-CNF. Along with the fact that k-DL is closed under complementation (shown in part a), we say that k-CNF$\subseteq$k-DL.
 
-With each component a subset of k-DL, we say there union is also a subset of k-DL denoted as k-DNF $\cup$ k-CNF$\subseteq$k-DL.
+With each component a subset of k-DL, we conclude their union is also a subset of k-DL denoted as k-DNF $\cup$ k-CNF$\subseteq$k-DL.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{part c}
@@ -18,34 +18,35 @@ Input of the algorithm: sample space $S$ over samples $\textbf{x}$ which have $n
 Notations: $L_n$ denotes the set of 2n literals ($x_n, \neg{x_n}$) associated with samples. $C_k^n$ denotes the set of all conjunctions of size at most $k$ with literals drawn from $L_n$.
 
 \begin{enumerate}
+\item Initialize the sample space $S$ as a set of all the training data, and decision list $DL$ as empty.
+\item Set the default output which is denoted by $b$ as 0.
 \item Check if sample space $S$ is empty. If so, stop the algorithm. If not, continue.
-\item Set the default output which is denoted by $b = 0$.
 \item Check each item in $C_k^n$ in turn until found an item $e$ that all samples $\textbf{x}$ in $S$ outputs the same label $l$, either positive or negative, when $e$ is true.
-\item Move the samples from $S$ into $T$ if it makes $e$ true.
-\item Put $e$ in decision list $DL$ along with its output label $l$.
-\item For the rest samples in $S$, repeat step 1 to 4 until $S$ is empty.
+\item Move the samples from $S$ into $DL$ if it makes $e$ true.
+\item Put $e$ in decision list $DL$ as a condition along with its output label $l$.
+\item For the rest samples in $S$, repeat step 2 to 6 until $S$ is empty.
 \end{enumerate}
 
-Note that in this algorithm, we didn't double check the existence of an item $e$ or a decision list that is consistent with all samples since the question statement claims that the samples are consistent with some k-decision list.
+Note that in this algorithm, we didn't double check the existence of an item $e$ or the existent of a decision list that is consistent with all samples since the problem statement claims that the samples are consistent with some k-decision list.
 
-The intuition of this algorithm is that if a conjunction/item $e$ that is consistent with the given samples, then no matter in which order it presents or being added to the decision list, it will always be consistent with any subset of the samples. Therefore, the order we examine items from $C_k^n$ does not kill the algorithm.
+The intuition of this algorithm is that if a conjunction item $e$ (later added as a condition to the decision list) that is consistent with the given samples, then no matter in which order it presents or being added to the decision list, it will always be consistent with any subset of the samples. Therefore, the order we examine items from $C_k^n$ does not kill the algorithm.
 
-In summary, the algorithm starts by checking items in $C_k^n$ and finding the first item that is consistent with the samples in $S$. As soon as it finds such an item, the algorithm puts it into the decision list and delete the samples from the sample space $S$. The algorithm continues finding item that is consistent with the updated $S$ until $S$ is empty which means all samples are being classified or explained.
+In summary, the algorithm starts by checking items in $C_k^n$ and finding the first item that is consistent with the samples in $S$. As soon as it finds such an item, the algorithm puts it into the decision list and delete the samples from the sample space $S$. The algorithm continues finding items that are consistent with the updated $S$ until $S$ is empty which means all samples are being classified or explained.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{part d}
 
-According to Occam's Razor: $m>\frac{1}{\epsilon}(ln(|H|)+ln(\frac{1}{\delta}))$. In order to show that the class of k-decision lists is efficiently PAC-learnable, we need to study the size of k-decision list is linear in n. Also, we need to study the computational complexity of the class.
+According to Occam's Razor: $m>\frac{1}{\epsilon}(ln(|H|)+ln(\frac{1}{\delta}))$. In order to show that the class of k-decision lists is efficiently PAC-learnable, we need to study both the size of the k-decision list and its computational complexity.
 
-Again, we adopt the notations $L_n$ denotes the set of 2n literals ($x_n, \neg{x_n}$) associated with samples and $C_k^n$ denotes the set of all conjunctions of size at most $k$ with literals drawn from $L_n$.
+Again, we adopt the notations $L_n$ to represent the set of 2n literals ($x_n, \neg{x_n}$) associated with samples and $C_k^n$ denotes the set of all conjunctions of size at most $k$ with literals drawn from $L_n$.
 
-Since all samples have $n$ dimensions, we know that for all items in decision list there are $3^{|C_k^n|}$ combinations given each term has three options of missing, negative and positive. Another thing to notice is that the order of terms appeared in each item does not matter which gives us $(C_k^n)!$ combinations.
+We claim there are $3^{|C_k^n|}$ possible combinations since each term in $C_k^n$ has three options of missing, label as negative and label as positive. Another thing to notice is that the order of conditions appeared in decision list is arbitrary which means number of $(C_k^n)!$ possible orders.
 
 Therefore, the size of a k-decision list is $\mathcal{O}(3^{|C_k^n|}(C_k^n)!)$. Then we have $lg(|k-DL(n)|) = \mathcal{O}(n^t)$ for some constant $t$.We conclude that k-decision list has size which is polynomial in n.
 
 Next, we study the computational complexity of the algorithm proposed in part c to find a k-decision list. The computation complexity is also polynomial in time since the critical component $C_k^n$, in the algorithm, is polynomial in $n$ for any fixed $k$.
 
-Therefore, we conclude that with polynomial sample size and polynomial computation time, the k-decision list class is efficiently PAC-learnable.
+Therefore, we conclude that with polynomial sample complexity and polynomial computation time, the k-decision list class is efficiently PAC-learnable.
 
 
 
