@@ -54,9 +54,38 @@ where $x_i, y_i$ are provided by training data while $\alpha_i$ is returned by t
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{part c}
 
+One key point to notice is that running kernel Perceptron in the original sample space is the same as running original (or unmodified) Perceptron in the blown-up space. In our case, the blown-up space has $m$ dimensions. $m$ is the number of training samples available. Each training example $x$ is mapped to the new space $P$ according to the kernel function $K(x_i,x)$ where $i \in 1,2,...m$. To be more clear, training example $x_i$ is mapped to point $p_i = <K(x_1,x_i), K(x_2,x_i), ..., K(x_m, x_i)>$.
 
+First, we try to find $R$. According to the Novikoff's theorem, for the original Perceptron, $R \geq \|x_i\|$ for any $i$. Inspired by this, in order to find the $R$ for the new space we need to find the maximum $p_i$ in the space $P$. Based on the kernel function specified in part a, we see that for any pair of examples, $K(\cdot,\cdot) \leq \sum_{j=0}^{n}{n \choose j}$ since the maximum number of common literals between any pair of examples is $n$. Therefore, we claim that $\|p_i\| \leq \sqrt{m ( \sum_{j=0}^{n}{n \choose j} ) ^2}$. We define $R = \sqrt{m ( \sum_{j=0}^{n}{n \choose j} ) ^2}$
 
+Next, we try to find $\gamma$. Given by the problem statement, we know for sure we could learn a classifier that is consistent with all the training data. Therefore, in the new space $P$, we could compute the minimum distance between any two points with one point has positive label and the other point has negative label. The distance could be described as follows:
 
+\begin{equation}
+d = min \|p_1 - p_2\|
+\end{equation}
+where $p_1$ is any point from $P$ that has positive label while $p_2$ has negative label.
+
+With the returned vector $\vec{\alpha}$, we know it satisfies the equation
+
+\begin{equation}
+y_i \alpha p_i\geq \frac{1}{2}d
+\end{equation}
+
+Normalizing $\alpha$ by dividing both side with $\|\alpha\|$ we have $y_i \alpha p_i \frac{1}{\|\alpha\|} \geq \frac{1}{2}d\frac{1}{\|\alpha\|}$.
+
+Suppose each training example is being trained $k$ times, which means $\|\alpha\| \leq \sqrt{km}$ in which $km$ describes the worst possible case that all examples were misclassified $k$ times. Now, we substitute $\|\alpha\|$ back in the right hand side of the above equation and obtain
+
+\begin{equation}
+y_i \alpha p_i \frac{1}{\|\alpha\|} \geq \frac{1}{2}d\frac{1}{\sqrt{km}}
+\end{equation}
+
+in which $\alpha \frac{1}{\|\alpha\|}$ can be seen as the $u$ in the Novikoff's theorem. Therefore, we define
+
+\begin{equation}
+\gamma = \frac{1}{2}d\frac{1}{\sqrt{km}}
+\end{equation}
+
+At last, we conclude the maximum number of mistakes the kernel Perceptron is bounded by $\frac{R^2}{\gamma^2}$ in which $R$ and $\gamma$ are defined as above.
 
 
 
